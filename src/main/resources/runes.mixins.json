@@ -1,12 +1,14 @@
 {
   "required": true,
   "minVersion": "0.8",
-  "package": "net.fabricmc.example.mixin",
+  "package": "de.aelpecyem.runes.mixin",
   "compatibilityLevel": "JAVA_16",
   "mixins": [
+    "common.EnchantmentScreenHandlerMixin"
   ],
   "client": [
-    "ExampleMixin"
+    "client.HandledScreenAccessor",
+    "client.EnchantmentScreenMixin"
   ],
   "injectors": {
     "defaultRequire": 1

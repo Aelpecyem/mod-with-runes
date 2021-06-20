@@ -1,0 +1,8 @@
+{
+  "item.rock.throw": {
+    "sounds": [
+      "random/bow"
+    ],
+    "subtitle": "subtitles.runes.item.rock.throw"
+  }
+}

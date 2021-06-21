@@ -37,14 +37,7 @@ public abstract class EnchantmentScreenHandlerMixin extends ScreenHandler implem
     @Override
     public void onSlotClick(int slotIndex, int button, SlotActionType actionType, PlayerEntity player) {
         super.onSlotClick(slotIndex, button, actionType, player);
-        if (slotIndex == 0){
-
-        }
-    }
-
-
-    private void isValidRuneRecipe(){
-
+        //consume xp and lapis
     }
 
     @Inject(method = "onButtonClick", at = @At("HEAD"), cancellable = true)
@@ -57,6 +50,7 @@ public abstract class EnchantmentScreenHandlerMixin extends ScreenHandler implem
                 cir.setReturnValue(true);
             }
         }
+        //todo check recipes when one of these is changed, change item (if craftable)
     }
 
     @Override

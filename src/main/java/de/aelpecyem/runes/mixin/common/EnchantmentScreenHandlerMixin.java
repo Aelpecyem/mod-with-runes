@@ -1,14 +1,21 @@
 package de.aelpecyem.runes.mixin.common;
 
+import de.aelpecyem.runes.common.misc.RuneEnchantingSlot;
+import de.aelpecyem.runes.common.recipe.RuneEnchantingRecipe;
 import de.aelpecyem.runes.common.reg.RunesObjects;
 import de.aelpecyem.runes.util.EnhancedEnchantingAccessor;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.Inventory;
+import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
 import net.minecraft.screen.*;
+import net.minecraft.screen.slot.Slot;
 import net.minecraft.screen.slot.SlotActionType;
 import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Shadow;
+import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
@@ -16,8 +23,10 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(EnchantmentScreenHandler.class)
 public abstract class EnchantmentScreenHandlerMixin extends ScreenHandler implements EnhancedEnchantingAccessor {
+    @Shadow private Inventory inventory;
     private int[] runePixels = new int[64];
     private boolean runeMode = false;
+    private RuneEnchantingRecipe currentRecipe;
     private EnchantmentScreenHandlerMixin(@Nullable ScreenHandlerType<?> type, int syncId) {
         super(type, syncId);
     }
@@ -27,6 +36,7 @@ public abstract class EnchantmentScreenHandlerMixin extends ScreenHandler implem
         for (int i = 0; i < runePixels.length; i++) {
             this.addProperty(Property.create(runePixels, i));
         }
+        this.slots.set(0, new RuneEnchantingSlot(this, inventory, 0, 15, 47));
     }
 
     @Inject(method = "onContentChanged", at = @At("HEAD"), cancellable = true)
@@ -34,10 +44,11 @@ public abstract class EnchantmentScreenHandlerMixin extends ScreenHandler implem
         runeMode = inventory.getStack(0).getItem() == RunesObjects.SMOOTH_ROCK;
     }
 
-    @Override
-    public void onSlotClick(int slotIndex, int button, SlotActionType actionType, PlayerEntity player) {
-        super.onSlotClick(slotIndex, button, actionType, player);
-        //consume xp and lapis
+    @Inject(method = "transferSlot", at = @At("HEAD"), cancellable = true)
+    private void transferSlot(PlayerEntity player, int index, CallbackInfoReturnable<ItemStack> cir){
+        if (index == 0 && runeMode){
+            cir.setReturnValue(ItemStack.EMPTY);
+        }
     }
 
     @Inject(method = "onButtonClick", at = @At("HEAD"), cancellable = true)
@@ -50,6 +61,7 @@ public abstract class EnchantmentScreenHandlerMixin extends ScreenHandler implem
                 cir.setReturnValue(true);
             }
         }
+        currentRecipe = RuneEnchantingRecipe.getRecipe(runePixels).orElse(null);
         //todo check recipes when one of these is changed, change item (if craftable)
     }
 
@@ -61,5 +73,10 @@ public abstract class EnchantmentScreenHandlerMixin extends ScreenHandler implem
     @Override
     public int[] getRunePixels() {
         return runePixels;
+    }
+
+    @Override
+    public RuneEnchantingRecipe getRecipe() {
+        return currentRecipe;
     }
 }

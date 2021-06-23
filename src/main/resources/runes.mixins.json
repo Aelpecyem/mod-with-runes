@@ -4,11 +4,12 @@
   "package": "de.aelpecyem.runes.mixin",
   "compatibilityLevel": "JAVA_16",
   "mixins": [
-    "common.EnchantmentScreenHandlerMixin"
+    "common.EnchantmentScreenHandlerMixin",
+    "common.ServerResourceManagerMixin"
   ],
   "client": [
-    "client.HandledScreenAccessor",
-    "client.EnchantmentScreenMixin"
+    "client.EnchantmentScreenMixin",
+    "client.HandledScreenAccessor"
   ],
   "injectors": {
     "defaultRequire": 1

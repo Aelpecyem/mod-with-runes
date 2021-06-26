@@ -34,7 +34,6 @@ public class RuneScreen extends DrawableHelper {
     private static final Identifier TEXTURE = RunesMod.id("textures/gui/container/runes_table.png");
     private static final Identifier BOOK_TEXTURE = new Identifier("textures/entity/enchanting_table_book.png");
     private final BookModel BOOK_MODEL = new BookModel(MinecraftClient.getInstance().getEntityModelLoader().getModelPart(EntityModelLayers.BOOK));
-    ;
     private static final int pixelWidth = 8;
     private final EnchantmentScreen screen;
     private final EnchantmentScreenHandler handler;

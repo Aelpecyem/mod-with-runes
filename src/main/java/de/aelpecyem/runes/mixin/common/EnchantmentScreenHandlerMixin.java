@@ -24,9 +24,10 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 @Mixin(EnchantmentScreenHandler.class)
 public abstract class EnchantmentScreenHandlerMixin extends ScreenHandler implements EnhancedEnchantingAccessor {
     @Shadow private Inventory inventory;
-    private int[] runePixels = new int[64];
+    private final int[] runePixels = new int[64];
     private boolean runeMode = false;
     private RuneEnchantingRecipe currentRecipe;
+    private boolean recipeChanged = false;
     private EnchantmentScreenHandlerMixin(@Nullable ScreenHandlerType<?> type, int syncId) {
         super(type, syncId);
     }
@@ -62,6 +63,13 @@ public abstract class EnchantmentScreenHandlerMixin extends ScreenHandler implem
             }
         }
         currentRecipe = RuneEnchantingRecipe.getRecipe(runePixels).orElse(null);
+        if (currentRecipe != null && !recipeChanged){
+            //"de-sync" client handler item
+            recipeChanged = true;
+        }else if (recipeChanged && currentRecipe == null){
+            //"re-sync" client handler item
+            syncState();
+        }
         //todo check recipes when one of these is changed, change item (if craftable)
     }
 

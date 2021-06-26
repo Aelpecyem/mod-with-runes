@@ -8,8 +8,6 @@ import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.item.Item;
 import net.minecraft.util.registry.Registry;
 
-import java.util.Objects;
-
 public class RunesObjects {
     public static final Item SMOOTH_ROCK = new ThrowableRockItem((owner, target, hitPos, entity) -> {
         if (target != null) {

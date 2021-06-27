@@ -1,14 +1,16 @@
 package de.aelpecyem.runes.mixin.common;
 
+import de.aelpecyem.runes.client.packet.SyncRuneRecipePacket;
 import de.aelpecyem.runes.common.misc.RuneEnchantingSlot;
 import de.aelpecyem.runes.common.recipe.RuneEnchantingRecipe;
 import de.aelpecyem.runes.common.reg.RunesObjects;
 import de.aelpecyem.runes.util.EnhancedEnchantingAccessor;
+import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.Inventory;
-import net.minecraft.item.ItemStack;
 import net.minecraft.screen.*;
+import net.minecraft.server.network.ServerPlayerEntity;
 import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -20,10 +22,10 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 @Mixin(EnchantmentScreenHandler.class)
 public abstract class EnchantmentScreenHandlerMixin extends ScreenHandler implements EnhancedEnchantingAccessor {
     @Shadow private Inventory inventory;
-    private final int[] runePixels = new int[64];
+    private int[] runePixels = new int[64];
     private boolean runeMode = false;
     private RuneEnchantingRecipe currentRecipe;
-    private boolean recipeChanged = false;
+    private boolean hasRecipe = false;
     private EnchantmentScreenHandlerMixin(@Nullable ScreenHandlerType<?> type, int syncId) {
         super(type, syncId);
     }
@@ -33,19 +35,12 @@ public abstract class EnchantmentScreenHandlerMixin extends ScreenHandler implem
         for (int i = 0; i < runePixels.length; i++) {
             this.addProperty(Property.create(runePixels, i));
         }
-        this.slots.set(0, new RuneEnchantingSlot(this, inventory, 0, 15, 47));
+        this.slots.set(0, new RuneEnchantingSlot(playerInventory.player.world.isClient, this, inventory, 0, 15, 47));
     }
 
     @Inject(method = "onContentChanged", at = @At("HEAD"), cancellable = true)
     private void onContentChanged(Inventory inventory, CallbackInfo ci){
         runeMode = inventory.getStack(0).getItem() == RunesObjects.SMOOTH_SLATE;
-    }
-
-    @Inject(method = "transferSlot", at = @At("HEAD"), cancellable = true)
-    private void transferSlot(PlayerEntity player, int index, CallbackInfoReturnable<ItemStack> cir){
-        if (index == 0 && runeMode){
-            cir.setReturnValue(ItemStack.EMPTY);
-        }
     }
 
     @Inject(method = "onButtonClick", at = @At("HEAD"), cancellable = true)
@@ -58,15 +53,16 @@ public abstract class EnchantmentScreenHandlerMixin extends ScreenHandler implem
                 cir.setReturnValue(true);
             }
         }
-        currentRecipe = RuneEnchantingRecipe.getRecipe(runePixels).orElse(null);
-        if (currentRecipe != null && !recipeChanged){
-            //"de-sync" client handler item
-            recipeChanged = true;
-        }else if (recipeChanged && currentRecipe == null){
-            //"re-sync" client handler item
-            syncState();
+        if (player instanceof ServerPlayerEntity sp) {
+            currentRecipe = RuneEnchantingRecipe.getRecipe(runePixels).orElse(null);
+            if (currentRecipe != null && !hasRecipe) {
+                SyncRuneRecipePacket.send(sp, currentRecipe, syncId);
+                hasRecipe = true;
+            } else if (hasRecipe && currentRecipe == null) {
+                SyncRuneRecipePacket.send(sp, null, syncId);
+                hasRecipe = false;
+            }
         }
-        //todo check recipes when one of these is changed, change item (if craftable)
     }
 
     @Override
@@ -80,7 +76,17 @@ public abstract class EnchantmentScreenHandlerMixin extends ScreenHandler implem
     }
 
     @Override
+    public void clearPixels() {
+        runePixels = new int[64];
+    }
+
+    @Override
     public RuneEnchantingRecipe getRecipe() {
         return currentRecipe;
+    }
+
+    @Override
+    public void setRecipe(RuneEnchantingRecipe recipe) {
+        this.currentRecipe = recipe;
     }
 }

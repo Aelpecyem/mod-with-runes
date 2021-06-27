@@ -11,5 +11,9 @@ public interface EnhancedEnchantingAccessor {
         return getRunePixels()[x + y * 8];
     }
 
+    void clearPixels();
+
     RuneEnchantingRecipe getRecipe();
+
+    void setRecipe(RuneEnchantingRecipe recipe);
 }

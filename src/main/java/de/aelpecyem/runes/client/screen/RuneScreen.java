@@ -2,32 +2,26 @@ package de.aelpecyem.runes.client.screen;
 
 import com.mojang.blaze3d.systems.RenderSystem;
 import de.aelpecyem.runes.RunesMod;
+import de.aelpecyem.runes.common.reg.RunesObjects;
 import de.aelpecyem.runes.mixin.client.HandledScreenAccessor;
 import de.aelpecyem.runes.util.EnhancedEnchantingAccessor;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.DrawableHelper;
-import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.gui.screen.ingame.EnchantingPhrases;
 import net.minecraft.client.gui.screen.ingame.EnchantmentScreen;
-import net.minecraft.client.gui.screen.ingame.HandledScreen;
 import net.minecraft.client.render.*;
 import net.minecraft.client.render.entity.model.BookModel;
 import net.minecraft.client.render.entity.model.EntityModelLayers;
 import net.minecraft.client.render.model.json.ModelTransformation;
 import net.minecraft.client.util.math.MatrixStack;
-import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.screen.EnchantmentScreenHandler;
-import net.minecraft.text.StringVisitable;
-import net.minecraft.text.Text;
+import net.minecraft.text.TranslatableText;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Matrix4f;
 import net.minecraft.util.math.Vec3f;
-import org.spongepowered.asm.mixin.Unique;
-
-import java.awt.*;
 
 @Environment(EnvType.CLIENT)
 public class RuneScreen extends DrawableHelper {
@@ -64,19 +58,32 @@ public class RuneScreen extends DrawableHelper {
         matrices.pop();
         drawBackground(client, matrices, delta, mouseX, mouseY);
 
-        matrices.push();
-        matrices.translate(getOffsetX() - 39, getOffsetY() + 44, 300 + getZOffset());
-        matrices.scale(1/8F, 1/8F, 1);
-        RenderSystem.enableDepthTest();
-        for (int x = 0; x < 8; x++) {
-            for (int y = 0; y < 8; y++) {
-                boolean active = accessor.getPixel(x, y) > 0;
-                if (active) {
-                    drawColoredQuad(matrices.peek().getModel(), x, y, 0x000000);
+        if (accessor.getRecipe() == null){
+            matrices.push();
+            matrices.translate(getOffsetX() - 39, getOffsetY() + 44, 275 + getZOffset());
+            RenderSystem.enableDepthTest();
+            matrices.scale(1/8F, 1/8F, 1);
+            for (int x = 0; x < 8; x++) {
+                for (int y = 0; y < 8; y++) {
+                    boolean active = accessor.getPixel(x, y) > 0;
+                    if (active) {
+                        drawColoredQuad(matrices.peek().getModel(), x, y, 0x000000);
+                    }
                 }
             }
+
+            RenderSystem.disableDepthTest();
+            matrices.pop();
+        }else{
+            matrices.push();
+            matrices.translate(getOffsetX() + 80, getOffsetY(), 0);
+            client.textRenderer.drawWithShadow(matrices, new TranslatableText("text." + RunesMod.MOD_ID + ".xp_cost", accessor.getRecipe().xpCost()), -14, 0, client.player.experienceLevel < accessor.getRecipe().xpCost() ? 16733525 : 16777088);
+            if (handler.getStacks().get(1).isEmpty()){
+                client.textRenderer.drawTrimmed(new TranslatableText("text." + RunesMod.MOD_ID + ".missing_lapis", accessor.getRecipe().xpCost()), getOffsetX() + 67, getOffsetY() + 13, 50, 0);
+                client.textRenderer.drawTrimmed(new TranslatableText("text." + RunesMod.MOD_ID + ".missing_lapis", accessor.getRecipe().xpCost()), getOffsetX() + 66, getOffsetY() + 12, 50, 16733525);
+            }
+            matrices.pop();
         }
-        matrices.pop();
     }
 
     private void renderItemBackground(MinecraftClient client, MatrixStack matrices) {
@@ -90,7 +97,7 @@ public class RuneScreen extends DrawableHelper {
         matrices.push();
         matrices.translate(32, 24, 0);
         matrices.scale(16 * 8, -16 * 8, 16 * 8);
-        client.getItemRenderer().renderItem(handler.getStacks().get(0), ModelTransformation.Mode.GUI, LightmapTextureManager.pack(15, 15), OverlayTexture.DEFAULT_UV, matrices, immediate, handler.getSeed());
+        client.getItemRenderer().renderItem(RunesObjects.SMOOTH_SLATE.getDefaultStack(), ModelTransformation.Mode.GUI, LightmapTextureManager.pack(15, 15), OverlayTexture.DEFAULT_UV, matrices, immediate, handler.getSeed());
         immediate.draw();
         matrices.pop();
         RenderSystem.disableScissor();

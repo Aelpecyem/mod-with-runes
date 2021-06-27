@@ -10,10 +10,12 @@ import net.minecraft.sound.SoundEvents;
 
 public class RuneEnchantingSlot extends Slot {
     private EnhancedEnchantingAccessor enchantingAccessor;
+    private boolean client;
 
-    public RuneEnchantingSlot(EnhancedEnchantingAccessor enchantingAccessor, Inventory inventory, int index, int x, int y) {
+    public RuneEnchantingSlot(boolean client, EnhancedEnchantingAccessor enchantingAccessor, Inventory inventory, int index, int x, int y) {
         super(inventory, index, x, y);
         this.enchantingAccessor = enchantingAccessor;
+        this.client = client;
     }
 
     public boolean canInsert(ItemStack stack) {
@@ -25,30 +27,39 @@ public class RuneEnchantingSlot extends Slot {
     }
 
     @Override
+    public ItemStack getStack() {
+        return enchantingAccessor.isRuneMode() && client && enchantingAccessor.getRecipe() != null ? enchantingAccessor.getRecipe().output() : super.getStack();
+    }
+
+    @Override
     public void onTakeItem(PlayerEntity player, ItemStack stack) {
         super.onTakeItem(player, stack);
-        if (enchantingAccessor.isRuneMode() && enchantingAccessor.getRecipe() != null
-                && enchantingAccessor.getRecipe().output().isItemEqual(stack)){
+        if (enchantingAccessor.isRuneMode() && enchantingAccessor.getRecipe() != null){
             player.experienceLevel -= enchantingAccessor.getRecipe().xpCost();
             player.world.playSound(null, player.getBlockPos(), SoundEvents.BLOCK_ENCHANTMENT_TABLE_USE, SoundCategory.BLOCKS, 1.0F, player.world.random.nextFloat() * 0.1F + 0.9F);
+            inventory.removeStack(1, 1);
+            inventory.removeStack(0, 1);
+            enchantingAccessor.clearPixels();
         }
+    }
+
+    @Override
+    protected void onCrafted(ItemStack stack) {
+        super.onCrafted(stack);
     }
 
     @Override
     public ItemStack takeStack(int amount) {
         if (enchantingAccessor.isRuneMode() && enchantingAccessor.getRecipe() != null){
-            inventory.removeStack(1, 1);
-            inventory.removeStack(0, 1);
-            return enchantingAccessor.getRecipe().output();
+            return enchantingAccessor.getRecipe().output().copy();
         }
         return super.takeStack(amount);
     }
 
     @Override
     public boolean canTakeItems(PlayerEntity playerEntity) {
-        return enchantingAccessor.isRuneMode() ?
-                !playerEntity.world.isClient && (enchantingAccessor.getRecipe() == null ||
-                        (playerEntity.experienceLevel >= enchantingAccessor.getRecipe().xpCost() && inventory.getStack(1).getCount() > 1)) :
+        return enchantingAccessor.isRuneMode() && enchantingAccessor.getRecipe() != null ?
+                (playerEntity.experienceLevel >= enchantingAccessor.getRecipe().xpCost() && inventory.getStack(1).getCount() > 1) :
                 super.canTakeItems(playerEntity);
     }
 }

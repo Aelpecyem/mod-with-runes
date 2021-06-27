@@ -4,6 +4,7 @@ import com.google.common.collect.ImmutableMap;
 import com.google.gson.*;
 import de.aelpecyem.runes.RunesMod;
 import net.minecraft.item.ItemStack;
+import net.minecraft.network.PacketByteBuf;
 import net.minecraft.recipe.ShapedRecipe;
 import net.minecraft.resource.JsonDataLoader;
 import net.minecraft.resource.ResourceManager;
@@ -21,6 +22,17 @@ public record RuneEnchantingRecipe(Identifier id, ItemStack output, int xpCost, 
 
     public boolean matches(int[] pixels) {
         return Arrays.equals(this.pixels, pixels);
+    }
+
+    public void toPacket(PacketByteBuf buf){
+        buf.writeIdentifier(id);
+        buf.writeItemStack(output);
+        buf.writeInt(xpCost);
+        buf.writeIntArray(pixels);
+    }
+
+    public static RuneEnchantingRecipe fromPacket(PacketByteBuf buf){
+        return new RuneEnchantingRecipe(buf.readIdentifier(), buf.readItemStack(), buf.readInt(), buf.readIntArray());
     }
 
     public static Optional<RuneEnchantingRecipe> getRecipe(int[] pixels){

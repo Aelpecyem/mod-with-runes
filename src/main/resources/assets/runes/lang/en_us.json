@@ -12,6 +12,12 @@
       "bifrost_amulet": "\"The untainted gain power\""
     }
   },
+  "text": {
+    "runes": {
+      "xp_cost": "Levels: %d",
+      "missing_lapis": "Missing Lapis Lazuli"
+    }
+  },
   "subtitles": {
     "runes": {
       "item": {

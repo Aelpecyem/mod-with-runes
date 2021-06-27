@@ -1,7 +1,15 @@
 {
   "item": {
     "runes": {
-      "smooth_rock": "Smooth Rock"
+      "smooth_slate": "Smooth Slate",
+      "bifrost_rune": "Rune of Bifrost",
+      "bifrost_amulet": "Amulet of Bifrost"
+    }
+  },
+  "tooltip": {
+    "runes": {
+      "bifrost_rune": "Crafting Ingredient",
+      "bifrost_amulet": "\"The untainted gain power\""
     }
   },
   "subtitles": {

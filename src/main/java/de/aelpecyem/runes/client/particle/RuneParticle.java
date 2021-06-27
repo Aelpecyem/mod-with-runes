@@ -95,7 +95,7 @@ public class RuneParticle extends SpriteBillboardParticle {
         public Particle createParticle(RuneParticleEffect effect, ClientWorld clientWorld, double d, double e, double f, double g, double h, double i) {
             RuneParticle runeParticle = new RuneParticle(clientWorld, d, e, f, g, h, i);
             runeParticle.setSprite(this.spriteProvider);
-            float var = clientWorld.random.nextFloat() * 0.6F + 0.4F;
+            float var = clientWorld.random.nextFloat() * 0.2F + 0.8F;
             runeParticle.colorRed = effect.getColor().getX() * var;
             runeParticle.colorGreen = effect.getColor().getY() * var;
             runeParticle.colorBlue = effect.getColor().getZ() * var;

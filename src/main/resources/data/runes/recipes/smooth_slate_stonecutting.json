@@ -1,8 +1,8 @@
 {
   "type": "minecraft:stonecutting",
   "ingredient": {
-    "item": "minecraft:stone"
+    "item": "minecraft:deepslate"
   },
-  "result": "runes:smooth_rock",
+  "result": "runes:smooth_slate",
   "count": 4
 }

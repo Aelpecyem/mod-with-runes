@@ -2,16 +2,16 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "runes:smooth_rock_stonecutting"
+      "runes:bifrost_amulet"
     ]
   },
   "criteria": {
-    "has_stone": {
+    "has_rune": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
           {
-            "item": "minecraft:stone"
+            "item": "runes:bifrost_rune"
           }
         ]
       }
@@ -19,7 +19,7 @@
   },
   "requirements": [
     [
-      "has_stone"
+      "has_rune"
     ]
   ]
 }

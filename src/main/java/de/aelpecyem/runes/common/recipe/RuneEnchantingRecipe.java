@@ -3,6 +3,8 @@ package de.aelpecyem.runes.common.recipe;
 import com.google.common.collect.ImmutableMap;
 import com.google.gson.*;
 import de.aelpecyem.runes.RunesMod;
+import de.aelpecyem.runes.util.RuneKnowledgeAccessor;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.network.PacketByteBuf;
 import net.minecraft.recipe.ShapedRecipe;
@@ -18,7 +20,7 @@ import java.util.Map;
 import java.util.Optional;
 
 public record RuneEnchantingRecipe(Identifier id, ItemStack output, int xpCost, int[] pixels) {
-    private static Map<Identifier, RuneEnchantingRecipe> recipes = ImmutableMap.of();
+    public static Map<Identifier, RuneEnchantingRecipe> recipes = ImmutableMap.of();
 
     public boolean matches(int[] pixels) {
         return Arrays.equals(this.pixels, pixels);
@@ -35,8 +37,10 @@ public record RuneEnchantingRecipe(Identifier id, ItemStack output, int xpCost, 
         return new RuneEnchantingRecipe(buf.readIdentifier(), buf.readItemStack(), buf.readInt(), buf.readIntArray());
     }
 
-    public static Optional<RuneEnchantingRecipe> getRecipe(int[] pixels){
-        return recipes.values().stream().filter(runeEnchantingRecipe -> runeEnchantingRecipe.matches(pixels)).findFirst();
+    public static Optional<RuneEnchantingRecipe> getRecipe(RuneKnowledgeAccessor player, int[] pixels){
+        return recipes.values().stream().filter(runeEnchantingRecipe -> runeEnchantingRecipe
+                .matches(pixels) && player.hasKnowledge(runeEnchantingRecipe))
+                .findFirst();
     }
 
     public static class RuneEnchantingManager extends JsonDataLoader {

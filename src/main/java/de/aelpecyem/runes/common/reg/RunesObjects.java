@@ -2,6 +2,7 @@ package de.aelpecyem.runes.common.reg;
 
 import de.aelpecyem.runes.RunesMod;
 import de.aelpecyem.runes.common.item.BifrostAmuletItem;
+import de.aelpecyem.runes.common.item.KnowledgeScrapItem;
 import de.aelpecyem.runes.common.item.ThrowableRockItem;
 import de.aelpecyem.runes.util.RegistryUtil;
 import net.fabricmc.api.EnvType;
@@ -11,7 +12,6 @@ import net.minecraft.client.item.TooltipContext;
 import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.text.Style;
 import net.minecraft.text.Text;
 import net.minecraft.text.TranslatableText;
 import net.minecraft.util.Formatting;
@@ -36,10 +36,12 @@ public class RunesObjects {
         }
     };
     public static final Item BIFROST_AMULET = new BifrostAmuletItem();
+    public static final KnowledgeScrapItem KNOWLEDGE_SCRAP = new KnowledgeScrapItem();
 
     public static void init(){
         RegistryUtil.register(Registry.ITEM,"smooth_slate", SMOOTH_SLATE);
         RegistryUtil.register(Registry.ITEM,"bifrost_rune",  BIFROST_RUNE);
         RegistryUtil.register(Registry.ITEM,"bifrost_amulet",  BIFROST_AMULET);
+        RegistryUtil.register(Registry.ITEM,"knowledge_scrap",  KNOWLEDGE_SCRAP);
     }
 }

@@ -3,7 +3,8 @@
     "runes": {
       "smooth_slate": "Smooth Slate",
       "bifrost_rune": "Rune of Bifrost",
-      "bifrost_amulet": "Amulet of Bifrost"
+      "bifrost_amulet": "Amulet of Bifrost",
+      "knowledge_scrap": "Knowledge Scrap"
     }
   },
   "tooltip": {
@@ -15,7 +16,8 @@
   "text": {
     "runes": {
       "xp_cost": "Levels: %d",
-      "missing_lapis": "Missing Lapis Lazuli"
+      "missing_lapis": "Missing Lapis Lazuli",
+      "unlocked_all": "The scrap indecipherable to you"
     }
   },
   "subtitles": {

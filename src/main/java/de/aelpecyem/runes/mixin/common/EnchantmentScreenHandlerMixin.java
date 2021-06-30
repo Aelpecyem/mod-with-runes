@@ -5,6 +5,7 @@ import de.aelpecyem.runes.common.misc.RuneEnchantingSlot;
 import de.aelpecyem.runes.common.recipe.RuneEnchantingRecipe;
 import de.aelpecyem.runes.common.reg.RunesObjects;
 import de.aelpecyem.runes.util.EnhancedEnchantingAccessor;
+import de.aelpecyem.runes.util.RuneKnowledgeAccessor;
 import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
@@ -53,8 +54,8 @@ public abstract class EnchantmentScreenHandlerMixin extends ScreenHandler implem
                 cir.setReturnValue(true);
             }
         }
-        if (player instanceof ServerPlayerEntity sp) {
-            currentRecipe = RuneEnchantingRecipe.getRecipe(runePixels).orElse(null);
+        if (player instanceof ServerPlayerEntity sp && player instanceof RuneKnowledgeAccessor knowledge) {
+            currentRecipe = RuneEnchantingRecipe.getRecipe(knowledge, runePixels).orElse(null);
             if (currentRecipe != null && !hasRecipe) {
                 SyncRuneRecipePacket.send(sp, currentRecipe, syncId);
                 hasRecipe = true;

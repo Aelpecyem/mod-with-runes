@@ -1,6 +1,7 @@
 package de.aelpecyem.runes.client;
 
 import de.aelpecyem.runes.RunesMod;
+import de.aelpecyem.runes.client.packet.SyncKnowledgeScrapPacket;
 import de.aelpecyem.runes.client.packet.SyncRuneRecipePacket;
 import de.aelpecyem.runes.client.particle.RuneParticle;
 import de.aelpecyem.runes.common.item.BifrostAmuletItem;
@@ -34,6 +35,7 @@ public class RunesClient implements ClientModInitializer {
             }
         });
         ClientPlayNetworking.registerGlobalReceiver(SyncRuneRecipePacket.ID, SyncRuneRecipePacket::handle);
+        ClientPlayNetworking.registerGlobalReceiver(SyncKnowledgeScrapPacket.ID, SyncKnowledgeScrapPacket::handle);
 
     }
 }

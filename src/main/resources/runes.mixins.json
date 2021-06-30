@@ -5,6 +5,7 @@
   "compatibilityLevel": "JAVA_16",
   "mixins": [
     "common.EnchantmentScreenHandlerMixin",
+    "common.PlayerEntityMixin",
     "common.ServerResourceManagerMixin"
   ],
   "client": [

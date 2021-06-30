@@ -20,6 +20,7 @@ import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class RunesObjects {
     public static final Item SMOOTH_SLATE = new ThrowableRockItem((owner, target, hitPos, entity) -> {
@@ -43,5 +44,16 @@ public class RunesObjects {
         RegistryUtil.register(Registry.ITEM,"bifrost_rune",  BIFROST_RUNE);
         RegistryUtil.register(Registry.ITEM,"bifrost_amulet",  BIFROST_AMULET);
         RegistryUtil.register(Registry.ITEM,"knowledge_scrap",  KNOWLEDGE_SCRAP);
+    }
+
+    public static List<ItemStack> appendItemsForGroup(){
+        return Registry.ITEM.getIds().stream().map(Registry.ITEM::get)
+                .filter(item -> item.getGroup() == RunesMod.GROUP)
+                .map(Item::getDefaultStack).collect(Collectors.toList());
+    }
+
+    public static void appendItemsForGroup(List<ItemStack> itemStacks) {
+        itemStacks.addAll(Registry.ITEM.getIds().stream().filter(id -> id.getNamespace().equals(RunesMod.MOD_ID))
+                .map(id -> Registry.ITEM.get(id).getDefaultStack()).collect(Collectors.toList()));
     }
 }

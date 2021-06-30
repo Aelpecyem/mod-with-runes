@@ -1,4 +1,9 @@
 {
+  "itemGroup": {
+    "runes": {
+      "group": "Runes"
+    }
+  },
   "item": {
     "runes": {
       "smooth_slate": "Smooth Slate",

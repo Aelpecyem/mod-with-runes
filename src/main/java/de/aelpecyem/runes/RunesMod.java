@@ -5,19 +5,19 @@ import de.aelpecyem.runes.common.reg.RunesObjects;
 import de.aelpecyem.runes.common.reg.RunesParticles;
 import de.aelpecyem.runes.common.reg.RunesSounds;
 import net.fabricmc.api.ModInitializer;
-import net.fabricmc.fabric.api.loot.v1.FabricLootSupplier;
-import net.fabricmc.fabric.api.loot.v1.FabricLootSupplierBuilder;
-import net.fabricmc.fabric.api.loot.v1.event.LootTableLoadingCallback;
+import net.fabricmc.fabric.api.client.itemgroup.FabricItemGroupBuilder;
 import net.minecraft.item.ItemGroup;
-import net.minecraft.loot.LootManager;
-import net.minecraft.resource.ResourceManager;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.registry.Registry;
 
-import java.util.IdentityHashMap;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class RunesMod implements ModInitializer {
     public static final String MOD_ID = "runes";
-    public static final ItemGroup GROUP = ItemGroup.BREWING; //todo
+    public static final ItemGroup GROUP = FabricItemGroupBuilder.create(new Identifier(MOD_ID, "group"))
+            .icon(RunesObjects.BIFROST_RUNE::getDefaultStack).appendItems(RunesObjects::appendItemsForGroup).build();
     @Override
     public void onInitialize() {
         RunesObjects.init();

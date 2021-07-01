@@ -59,7 +59,7 @@ public class KnowledgeScreen extends Screen {
         super.render(matrices, mouseX, mouseY, delta);
         matrices.push();
         matrices.translate(width / 2F, height / 2F, 0);
-        matrices.translate(-100, -100, 0);
+        matrices.translate(-100, -50, 0);
         drawCenteredText(matrices, textRenderer, getTitle(), pixelWidth * 4, -10, 0xFFFFFF);
         for (int x = 0; x < 8; x++) {
             for (int y = 0; y < 8; y++) {

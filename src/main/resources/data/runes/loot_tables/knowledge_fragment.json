@@ -6,7 +6,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "runes:knowledge_scrap",
+          "name": "runes:knowledge_fragment",
           "conditions": [
             {
               "condition": "minecraft:random_chance",

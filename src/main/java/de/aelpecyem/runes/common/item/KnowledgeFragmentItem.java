@@ -1,6 +1,7 @@
 package de.aelpecyem.runes.common.item;
 
 import de.aelpecyem.runes.RunesMod;
+import de.aelpecyem.runes.client.packet.OpenKnowledgeScreenPacket;
 import de.aelpecyem.runes.client.packet.SyncKnowledgeScrapPacket;
 import de.aelpecyem.runes.common.recipe.RuneEnchantingRecipe;
 import de.aelpecyem.runes.common.reg.RunesObjects;
@@ -26,8 +27,8 @@ import org.jetbrains.annotations.Nullable;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class KnowledgeScrapItem extends Item {
-    public KnowledgeScrapItem() {
+public class KnowledgeFragmentItem extends Item {
+    public KnowledgeFragmentItem() {
         super(new FabricItemSettings().maxCount(1).group(RunesMod.GROUP));
     }
 
@@ -39,7 +40,7 @@ public class KnowledgeScrapItem extends Item {
             RuneEnchantingRecipe recipe = presentRecipe != null ? presentRecipe : addKnowledge(knowledge, user, itemStack);
             if (recipe != null){
                 SyncKnowledgeScrapPacket.send(serverPlayer, recipe);
-                //todo open screen
+                OpenKnowledgeScreenPacket.send(serverPlayer, recipe);
             }else {
                 user.sendMessage(new TranslatableText("text." + RunesMod.MOD_ID + ".unlocked_all"), true);
                 return TypedActionResult.fail(itemStack);
@@ -89,6 +90,8 @@ public class KnowledgeScrapItem extends Item {
             setKnowledge(stack, bifrostRecipe);
             return bifrostRecipe;
         }
-        return null;
+        RuneEnchantingRecipe recipe = RuneEnchantingRecipe.recipes.values().stream().toList().get(user.getRandom().nextInt(RuneEnchantingRecipe.recipes.size()));
+        setKnowledge(stack, recipe);
+        return recipe;
     }
 }

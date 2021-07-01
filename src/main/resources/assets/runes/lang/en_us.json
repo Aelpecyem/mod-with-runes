@@ -9,7 +9,7 @@
       "smooth_slate": "Smooth Slate",
       "bifrost_rune": "Rune of Bifrost",
       "bifrost_amulet": "Amulet of Bifrost",
-      "knowledge_scrap": "Knowledge Scrap"
+      "knowledge_fragment": "Knowledge Fragment"
     }
   },
   "tooltip": {
@@ -23,6 +23,14 @@
       "xp_cost": "Levels: %d",
       "missing_lapis": "Missing Lapis Lazuli",
       "unlocked_all": "The scrap indecipherable to you"
+    }
+  },
+  "knowledge_text": {
+    "runes": {
+      "bifrost_rune": {
+        "title": "Rune of Bifrost",
+        "desc": "While strictly speaking not a real rune, the Rune of Bifrost symbolizes the passion of the runemaker. <br>Amulets made from it will buff their wearer as long as they are over 75% of their maximum health. <br>They will also emit colorful particles similar to the equally colorful god-bridge it is named after."
+      }
     }
   },
   "subtitles": {

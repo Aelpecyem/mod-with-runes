@@ -1,9 +1,9 @@
 package de.aelpecyem.runes.client.packet;
 
 import de.aelpecyem.runes.RunesMod;
+import de.aelpecyem.runes.client.screen.KnowledgeScreen;
 import de.aelpecyem.runes.common.recipe.RuneEnchantingRecipe;
 import de.aelpecyem.runes.common.reg.RunesObjects;
-import de.aelpecyem.runes.util.EnhancedEnchantingAccessor;
 import io.netty.buffer.Unpooled;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
@@ -14,35 +14,27 @@ import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.network.ClientPlayNetworkHandler;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.ItemStack;
 import net.minecraft.network.PacketByteBuf;
-import net.minecraft.screen.ScreenHandler;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.util.Identifier;
 
-public class SyncKnowledgeScrapPacket {
-    public static final Identifier ID = RunesMod.id("sync_scrap");
+public class OpenKnowledgeScreenPacket {
+    public static final Identifier ID = RunesMod.id("knowledge_screen");
 
     public static void send(ServerPlayerEntity player, RuneEnchantingRecipe recipe) {
         PacketByteBuf buf = new PacketByteBuf(Unpooled.buffer());
-        buf.writeInt(player.getId());
-        if (recipe != null) {
-            recipe.toPacket(buf);
-        }
-        PlayerLookup.tracking(player).forEach(tracked -> ServerPlayNetworking.send(tracked, ID, buf));
+        buf.writeIdentifier(recipe.id());
+        buf.writeIntArray(recipe.pixels());
         ServerPlayNetworking.send(player, ID, buf);
     }
 
     @Environment(EnvType.CLIENT)
     public static void handle(MinecraftClient client, ClientPlayNetworkHandler handler, PacketByteBuf buf, PacketSender responseSender) {
-        int entityId = buf.readInt();
-        RuneEnchantingRecipe recipe =RuneEnchantingRecipe.fromPacket(buf);
+        Identifier id = buf.readIdentifier();
+        int[] pixels = buf.readIntArray();
         client.execute(() -> {
             if (client.player != null){
-                Entity entity = client.world.getEntityById(entityId);
-                if (entity instanceof PlayerEntity p){
-                    RunesObjects.KNOWLEDGE_FRAGMENT.setKnowledge(p.getMainHandStack(), recipe);
-                }
+                client.openScreen(new KnowledgeScreen(pixels, id));
             }
         });
     }

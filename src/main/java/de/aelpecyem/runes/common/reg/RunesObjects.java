@@ -2,7 +2,7 @@ package de.aelpecyem.runes.common.reg;
 
 import de.aelpecyem.runes.RunesMod;
 import de.aelpecyem.runes.common.item.BifrostAmuletItem;
-import de.aelpecyem.runes.common.item.KnowledgeScrapItem;
+import de.aelpecyem.runes.common.item.KnowledgeFragmentItem;
 import de.aelpecyem.runes.common.item.ThrowableRockItem;
 import de.aelpecyem.runes.util.RegistryUtil;
 import net.fabricmc.api.EnvType;
@@ -37,13 +37,13 @@ public class RunesObjects {
         }
     };
     public static final Item BIFROST_AMULET = new BifrostAmuletItem();
-    public static final KnowledgeScrapItem KNOWLEDGE_SCRAP = new KnowledgeScrapItem();
+    public static final KnowledgeFragmentItem KNOWLEDGE_FRAGMENT = new KnowledgeFragmentItem();
 
     public static void init(){
         RegistryUtil.register(Registry.ITEM,"smooth_slate", SMOOTH_SLATE);
         RegistryUtil.register(Registry.ITEM,"bifrost_rune",  BIFROST_RUNE);
         RegistryUtil.register(Registry.ITEM,"bifrost_amulet",  BIFROST_AMULET);
-        RegistryUtil.register(Registry.ITEM,"knowledge_scrap",  KNOWLEDGE_SCRAP);
+        RegistryUtil.register(Registry.ITEM,"knowledge_fragment",  KNOWLEDGE_FRAGMENT);
     }
 
     public static List<ItemStack> appendItemsForGroup(){

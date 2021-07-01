@@ -14,7 +14,7 @@ public class RunesLootTables {
     public static final Map<Identifier, Identifier> LOOT_TABLE_INJECTS = new HashMap<>();
 
     public static void init(){
-        LOOT_TABLE_INJECTS.put(LootTables.SIMPLE_DUNGEON_CHEST, RunesMod.id("knowledge_scrap"));
+        LOOT_TABLE_INJECTS.put(LootTables.SIMPLE_DUNGEON_CHEST, RunesMod.id("knowledge_fragment"));
         LOOT_TABLE_INJECTS.put(LootTables.ABANDONED_MINESHAFT_CHEST, RunesMod.id("knowledge_scrap"));
         LOOT_TABLE_INJECTS.put(LootTables.BASTION_TREASURE_CHEST, RunesMod.id("knowledge_scrap"));
         LOOT_TABLE_INJECTS.put(LootTables.STRONGHOLD_LIBRARY_CHEST, RunesMod.id("knowledge_scrap"));

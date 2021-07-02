@@ -20,6 +20,10 @@ repositories {
 		name = "Ladysnake Libs"
 		url = "https://ladysnake.jfrog.io/artifactory/mods"
 	}
+	maven {
+		name = "Jitpack"
+		url = "https://jitpack.io"
+	}
 }
 
 dependencies {
@@ -37,9 +41,9 @@ processResources {
 	filesMatching("fabric.mod.json") {
 		expand "version": project.version
 	}
-	filesMatching("**/lang/*.json") {
-		flattenJson.invoke(it)
-	}
+	//filesMatching("**/lang/*.json") {
+//		flattenJson.invoke(it)
+//	}
 }
 
 tasks.withType(JavaCompile).configureEach {

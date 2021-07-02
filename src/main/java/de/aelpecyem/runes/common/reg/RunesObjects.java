@@ -2,6 +2,7 @@ package de.aelpecyem.runes.common.reg;
 
 import de.aelpecyem.runes.RunesMod;
 import de.aelpecyem.runes.common.item.BifrostAmuletItem;
+import de.aelpecyem.runes.common.item.JeraRuneItem;
 import de.aelpecyem.runes.common.item.KnowledgeFragmentItem;
 import de.aelpecyem.runes.common.item.ThrowableRockItem;
 import de.aelpecyem.runes.util.RegistryUtil;
@@ -36,12 +37,14 @@ public class RunesObjects {
             tooltip.add(new TranslatableText("tooltip." + RunesMod.MOD_ID +".bifrost_rune").formatted(Formatting.GRAY));
         }
     };
+    public static final Item JERA_RUNE = new JeraRuneItem();
     public static final Item BIFROST_AMULET = new BifrostAmuletItem();
     public static final KnowledgeFragmentItem KNOWLEDGE_FRAGMENT = new KnowledgeFragmentItem();
 
     public static void init(){
         RegistryUtil.register(Registry.ITEM,"smooth_slate", SMOOTH_SLATE);
         RegistryUtil.register(Registry.ITEM,"bifrost_rune",  BIFROST_RUNE);
+        RegistryUtil.register(Registry.ITEM,"jera_rune",  JERA_RUNE);
         RegistryUtil.register(Registry.ITEM,"bifrost_amulet",  BIFROST_AMULET);
         RegistryUtil.register(Registry.ITEM,"knowledge_fragment",  KNOWLEDGE_FRAGMENT);
     }

@@ -7,8 +7,8 @@ import de.aelpecyem.runes.client.packet.SyncKnowledgeScrapPacket;
 import de.aelpecyem.runes.client.packet.SyncRuneRecipePacket;
 import de.aelpecyem.runes.client.particle.RuneParticle;
 import de.aelpecyem.runes.client.renderer.JeraRuneEntityRenderer;
-import de.aelpecyem.runes.common.entity.JeraRuneEntity;
 import de.aelpecyem.runes.common.item.BifrostAmuletItem;
+import de.aelpecyem.runes.common.item.OrbOfKnowledgeItem;
 import de.aelpecyem.runes.common.reg.RunesEntities;
 import de.aelpecyem.runes.common.reg.RunesObjects;
 import de.aelpecyem.runes.common.reg.RunesParticles;
@@ -19,16 +19,9 @@ import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.fabricmc.fabric.api.client.particle.v1.ParticleFactoryRegistry;
 import net.fabricmc.fabric.api.client.rendereregistry.v1.EntityRendererRegistry;
 import net.fabricmc.fabric.api.object.builder.v1.client.model.FabricModelPredicateProviderRegistry;
-import net.minecraft.client.item.UnclampedModelPredicateProvider;
-import net.minecraft.client.render.entity.EntityRenderer;
-import net.minecraft.client.render.entity.EntityRendererFactory;
+import net.fabricmc.fabric.impl.client.rendering.ColorProviderRegistryImpl;
 import net.minecraft.client.render.entity.FlyingItemEntityRenderer;
-import net.minecraft.client.render.entity.ItemEntityRenderer;
-import net.minecraft.client.world.ClientWorld;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import org.jetbrains.annotations.Nullable;
+import net.minecraft.util.math.MathHelper;
 
 @Environment(EnvType.CLIENT)
 public class RunesClient implements ClientModInitializer {
@@ -42,5 +35,15 @@ public class RunesClient implements ClientModInitializer {
         ClientPlayNetworking.registerGlobalReceiver(SyncKnowledgeScrapPacket.ID, SyncKnowledgeScrapPacket::handle);
         ClientPlayNetworking.registerGlobalReceiver(OpenKnowledgeScreenPacket.ID, OpenKnowledgeScreenPacket::handle);
         ClientPlayNetworking.registerGlobalReceiver(FertilizeParticlePacket.ID, FertilizeParticlePacket::handle);
+        ColorProviderRegistryImpl.ITEM.register((stack, tintIndex) -> {
+            if (tintIndex == 1) {
+                float ratio = OrbOfKnowledgeItem.getStoredXP(stack) / (float) OrbOfKnowledgeItem.getMaxStoredXP(stack);
+                int r = (int) MathHelper.lerp(ratio, 95, 75);
+                int g = (int) MathHelper.lerp(ratio, 122, 186);
+                int b = (int) MathHelper.lerp(ratio, 211, 11);
+                return (r << 16) + (g << 8) + (b);
+            }
+            return 0xFFFFFF;
+        }, RunesObjects.ORB_OF_KNOWLEDGE);
     }
 }

@@ -4,6 +4,7 @@
     "armor_stand"
   ],
   "slots": [
-    "chest/necklace"
+    "chest/necklace",
+    "head/hat"
   ]
 }

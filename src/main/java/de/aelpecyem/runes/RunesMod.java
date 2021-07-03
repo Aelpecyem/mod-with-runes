@@ -16,8 +16,7 @@ import java.util.stream.Collectors;
 
 public class RunesMod implements ModInitializer {
     public static final String MOD_ID = "runes";
-    public static final ItemGroup GROUP = FabricItemGroupBuilder.create(new Identifier(MOD_ID, "group"))
-            .icon(RunesObjects.BIFROST_RUNE::getDefaultStack).appendItems(RunesObjects::appendItemsForGroup).build();
+    public static final ItemGroup GROUP = ItemGroup.MISC;
     @Override
     public void onInitialize() {
         RunesObjects.init();

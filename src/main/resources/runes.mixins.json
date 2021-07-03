@@ -4,13 +4,15 @@
   "package": "de.aelpecyem.runes.mixin",
   "compatibilityLevel": "JAVA_16",
   "mixins": [
+    "common.AbstractMinecartEntityMixin",
     "common.EnchantmentScreenHandlerMixin",
     "common.PlayerEntityMixin",
     "common.ServerResourceManagerMixin"
   ],
   "client": [
     "client.EnchantmentScreenMixin",
-    "client.HandledScreenAccessor"
+    "client.HandledScreenAccessor",
+    "client.MinecartEntityRendererMixin"
   ],
   "injectors": {
     "defaultRequire": 1

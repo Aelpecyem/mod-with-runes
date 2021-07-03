@@ -18,8 +18,9 @@ public class RunesObjects {
             target.damage(DamageSource.thrownProjectile(entity, owner), 3);
         }
     }, new FabricItemSettings().maxCount(16).group(RunesMod.GROUP));
-    public static final Item BIFROST_RUNE = new RuneIngredientItem();
     public static final Item ANSUZ_RUNE = new RuneIngredientItem();
+    public static final Item BIFROST_RUNE = new RuneIngredientItem();
+    public static final Item RAIDHO_RUNE = new RaidhoRuneItem();
     public static final Item JERA_RUNE = new JeraRuneItem();
     public static final Item BIFROST_AMULET = new BifrostAmuletItem();
     public static final Item ORB_OF_KNOWLEDGE = new OrbOfKnowledgeItem();
@@ -29,6 +30,7 @@ public class RunesObjects {
         RegistryUtil.register(Registry.ITEM,"smooth_slate", SMOOTH_SLATE);
         RegistryUtil.register(Registry.ITEM,"ansuz_rune",  ANSUZ_RUNE);
         RegistryUtil.register(Registry.ITEM,"bifrost_rune",  BIFROST_RUNE);
+        RegistryUtil.register(Registry.ITEM,"raidho_rune",  RAIDHO_RUNE);
         RegistryUtil.register(Registry.ITEM,"jera_rune",  JERA_RUNE);
         RegistryUtil.register(Registry.ITEM,"bifrost_amulet",  BIFROST_AMULET);
         RegistryUtil.register(Registry.ITEM,"orb_of_knowledge",  ORB_OF_KNOWLEDGE);

@@ -3,5 +3,5 @@
 
 This mod was made for [Modfest 1.17](https://modfest.net/1.17/)!
 
-#License
+# License
 For information regarding the license of this mod, check the according [license file](LICENSE).

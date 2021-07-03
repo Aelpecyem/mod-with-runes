@@ -25,6 +25,7 @@
   ],
 
   "depends": {
+    "trinkets": ">=3.0.0",
     "fabricloader": ">=0.11.3",
     "fabric": "*",
     "minecraft": "1.17.x",

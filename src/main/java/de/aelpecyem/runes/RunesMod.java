@@ -1,9 +1,6 @@
 package de.aelpecyem.runes;
 
-import de.aelpecyem.runes.common.reg.RunesEntities;
-import de.aelpecyem.runes.common.reg.RunesObjects;
-import de.aelpecyem.runes.common.reg.RunesParticles;
-import de.aelpecyem.runes.common.reg.RunesSounds;
+import de.aelpecyem.runes.common.reg.*;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.client.itemgroup.FabricItemGroupBuilder;
 import net.minecraft.item.ItemGroup;
@@ -23,7 +20,7 @@ public class RunesMod implements ModInitializer {
         RunesEntities.init();
         RunesSounds.init();
         RunesParticles.init();
-
+        RunesLootTables.init();
     }
 
     public static Identifier id(String path){

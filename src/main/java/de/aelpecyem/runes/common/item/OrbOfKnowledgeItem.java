@@ -111,22 +111,4 @@ public class OrbOfKnowledgeItem extends TrinketItem {
             return equipped.stream().filter(pair -> !isFull(pair.getRight())).findFirst();
         }).orElse(Optional.empty());
     }
-
-
-    public static class ExperienceTooltipComponent implements TooltipComponent {
-        @Override
-        public void drawItems(TextRenderer textRenderer, int x, int y, MatrixStack matrices, ItemRenderer itemRenderer, int z, TextureManager textureManager) {
-            textRenderer.draw(matrices, "uwu", x, y, 0xFFFFFF);
-        }
-
-        @Override
-        public int getHeight() {
-            return 12;
-        }
-
-        @Override
-        public int getWidth(TextRenderer textRenderer) {
-            return 100;
-        }
-    }
 }

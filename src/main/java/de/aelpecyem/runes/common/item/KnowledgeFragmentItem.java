@@ -53,9 +53,9 @@ public class KnowledgeFragmentItem extends Item {
     @Environment(EnvType.CLIENT)
     public void appendTooltip(ItemStack stack, @Nullable World world, List<Text> tooltip, TooltipContext context) {
         super.appendTooltip(stack, world, tooltip, context);
-        RuneEnchantingRecipe recipe = getKnowledge(stack);
-        if (recipe != null){
-            tooltip.add(new TranslatableText(recipe.output().getTranslationKey()).formatted(Formatting.GRAY));
+        ItemStack outputStack = getRecipeStack(stack);
+        if (!outputStack.isEmpty()){
+            tooltip.add(new TranslatableText(outputStack.getTranslationKey()).formatted(Formatting.GRAY));
         }
     }
 
@@ -64,6 +64,7 @@ public class KnowledgeFragmentItem extends Item {
             stack.setTag(new NbtCompound());
         }
         stack.getTag().putString("RunesRecipe", recipe.id().toString());
+        stack.getTag().put("RunesRecipeOutput", recipe.output().writeNbt(new NbtCompound()));
     }
 
     public RuneEnchantingRecipe getKnowledge(ItemStack stack){
@@ -72,6 +73,13 @@ public class KnowledgeFragmentItem extends Item {
         }
         Identifier id = new Identifier(stack.getTag().getString("RunesRecipe"));
         return RuneEnchantingRecipe.recipes.get(id);
+    }
+
+    public ItemStack getRecipeStack(ItemStack stack){
+        if (!stack.hasTag() || !stack.getTag().contains("RunesRecipeOutput")){
+            return ItemStack.EMPTY;
+        }
+        return ItemStack.fromNbt((NbtCompound) stack.getTag().get("RunesRecipeOutput"));
     }
 
     private RuneEnchantingRecipe addKnowledge(RuneKnowledgeAccessor knowledge, PlayerEntity user, ItemStack stack) {

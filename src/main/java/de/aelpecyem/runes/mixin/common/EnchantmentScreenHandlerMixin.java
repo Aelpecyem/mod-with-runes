@@ -20,10 +20,12 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
+import java.util.Arrays;
+
 @Mixin(EnchantmentScreenHandler.class)
 public abstract class EnchantmentScreenHandlerMixin extends ScreenHandler implements EnhancedEnchantingAccessor {
     @Shadow private Inventory inventory;
-    private int[] runePixels = new int[64];
+    private final int[] runePixels = new int[64];
     private boolean runeMode = false;
     private RuneEnchantingRecipe currentRecipe;
     private boolean hasRecipe = false;
@@ -78,7 +80,7 @@ public abstract class EnchantmentScreenHandlerMixin extends ScreenHandler implem
 
     @Override
     public void clearPixels() {
-        runePixels = new int[64];
+        Arrays.fill(runePixels, 0);
     }
 
     @Override

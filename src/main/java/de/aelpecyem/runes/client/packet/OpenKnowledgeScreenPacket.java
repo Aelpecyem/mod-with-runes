@@ -27,15 +27,4 @@ public class OpenKnowledgeScreenPacket {
         buf.writeIntArray(recipe.pixels());
         ServerPlayNetworking.send(player, ID, buf);
     }
-
-    @Environment(EnvType.CLIENT)
-    public static void handle(MinecraftClient client, ClientPlayNetworkHandler handler, PacketByteBuf buf, PacketSender responseSender) {
-        Identifier id = buf.readIdentifier();
-        int[] pixels = buf.readIntArray();
-        client.execute(() -> {
-            if (client.player != null){
-                client.openScreen(new KnowledgeScreen(pixels, id));
-            }
-        });
-    }
 }

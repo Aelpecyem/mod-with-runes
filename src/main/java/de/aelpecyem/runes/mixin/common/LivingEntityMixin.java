@@ -91,7 +91,7 @@ public abstract class LivingEntityMixin extends Entity {
                     this.velocityDirty = true;
                     Vec3d vec3d = this.getVelocity();
                     Vec3d vec3d2 = (new Vec3d(x, y, z)).normalize().multiply(strength);
-                    this.setVelocity(vec3d.x / 2.0D - vec3d2.x, vec3d.z / 2.0D - vec3d2.z, vec3d.z / 2.0D - vec3d2.z);
+                    this.setVelocity(vec3d.x / 2.0D - vec3d2.x, vec3d.y / 2.0D - vec3d2.y, vec3d.z / 2.0D - vec3d2.z);
                 }
             }
             cir.setReturnValue(false);

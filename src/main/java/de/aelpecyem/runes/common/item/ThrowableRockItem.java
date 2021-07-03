@@ -29,9 +29,11 @@ import org.jetbrains.annotations.Nullable;
 
 public class ThrowableRockItem extends Item {
     public final HitAction onHit;
-    public ThrowableRockItem(HitAction onHit, Settings settings) {
+    private int timer;
+    public ThrowableRockItem(int timer, HitAction onHit, Settings settings) {
         super(settings);
         this.onHit = onHit;
+        this.timer = timer;
         DispenserBlock.registerBehavior(this, new ProjectileDispenserBehavior() {
             protected ProjectileEntity createProjectile(World world, Position position, ItemStack stack) {
                 return Util.make(new ThrownRockEntity(world, position.getX(), position.getY(), position.getZ()), (rock) -> {
@@ -53,7 +55,7 @@ public class ThrowableRockItem extends Item {
         }
 
         user.incrementStat(Stats.USED.getOrCreateStat(this));
-        user.getItemCooldownManager().set(this, 10);
+        user.getItemCooldownManager().set(this, timer);
         if (!user.getAbilities().creativeMode) {
             itemStack.decrement(1);
         }
@@ -62,6 +64,6 @@ public class ThrowableRockItem extends Item {
     }
 
     public interface HitAction {
-        void onHit(@Nullable Entity owner, @Nullable LivingEntity target, BlockPos hitPos, ThrownRockEntity entity);
+        void onHit(@Nullable Entity owner, @Nullable Entity target, BlockPos hitPos, ThrownRockEntity entity);
     }
 }

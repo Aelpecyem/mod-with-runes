@@ -35,8 +35,8 @@ public class ThrownRockEntity extends ThrownItemEntity {
     @Override
     protected void onEntityHit(EntityHitResult entityHitResult) {
         super.onEntityHit(entityHitResult);
-        if (getStack().getItem() instanceof ThrowableRockItem rock && entityHitResult.getEntity() instanceof LivingEntity livingEntity){
-            rock.onHit.onHit(getOwner(), livingEntity, entityHitResult.getEntity().getBlockPos(), this);
+        if (getStack().getItem() instanceof ThrowableRockItem rock && entityHitResult.getEntity() != null){
+            rock.onHit.onHit(getOwner(), entityHitResult.getEntity(), entityHitResult.getEntity().getBlockPos(), this);
         }
     }
 

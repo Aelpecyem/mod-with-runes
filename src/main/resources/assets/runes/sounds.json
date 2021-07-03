@@ -4,5 +4,11 @@
       "random/bow"
     ],
     "subtitle": "subtitles.runes.item.rock.throw"
+  },
+  "entity.stasis.hit": {
+    "sounds": [
+      "note/snare"
+    ],
+    "subtitle": "subtitles.runes.entity.stasis.hit"
   }
 }

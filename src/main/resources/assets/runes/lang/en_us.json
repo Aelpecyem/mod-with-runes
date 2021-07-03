@@ -4,6 +4,7 @@
   "item.runes.ansuz_rune": "Rune of Ansuz",
   "item.runes.bifrost_rune": "Rune of Bifrost",
   "item.runes.raidho_rune": "Rune of Raidho",
+  "item.runes.isa_rune": "Rune of Isa",
   "item.runes.jera_rune": "Rune of Jera",
   "item.runes.bifrost_amulet": "Amulet of Bifrost",
   "item.runes.orb_of_knowledge": "Orb of Knowledge",
@@ -11,6 +12,7 @@
   "tooltip.runes.ansuz_rune": "Crafting Ingredient",
   "tooltip.runes.bifrost_rune": "Crafting Ingredient",
   "tooltip.runes.raidho_rune": "Accelerates Minecarts",
+  "tooltip.runes.isa_rune": "Sets entities in stasis",
   "tooltip.runes.jera_rune": "Grows nearby crops when placed",
   "tooltip.runes.bifrost_amulet": "\"The undamaged gain power\"",
   "tooltip.runes.orb_of_knowledge": "Experience storage",
@@ -24,7 +26,10 @@
   "knowledge_text.runes.bifrost_rune.desc": "While strictly speaking not a real rune, the Rune of Bifrost symbolizes the passion of the runemaker. <br>Amulets made from it will buff their wearer as long as they are over 75% of their maximum health. <br>They will also emit colorful particles similar to the equally colorful god-bridge the rune is named after.",
   "knowledge_text.runes.raidho_rune.title": "Rune of Raidho",
   "knowledge_text.runes.raidho_rune.desc": "Raidho is the rune of the wheel. It can be applied to Minecarts in order to magically accelerate them. It can also be applied using Dispensers. <br>The rune can be removed by breaking the Minecart it was applied to.",
+  "knowledge_text.runes.isa_rune.title": "Rune of Isa",
+  "knowledge_text.runes.isa_rune.desc": "Isa represents stillness and the things that do not change on their own. As a rune, it can be hurled at entities to set them in stasis for a bit. <br>While in stasis, entities will retain any momentum possibly accumulated through hits.",
   "knowledge_text.runes.jera_rune.title": "Rune of Jera",
   "knowledge_text.runes.jera_rune.desc": "Jera is the rune of abundance. As such, it will fertilize nearby crops. <br>In practice, this selects one random crop to grow every few seconds.",
-  "subtitles.runes.item.rock.throw": "Rock Thrown"
+  "subtitles.runes.item.rock.throw": "Rock Thrown",
+  "subtitles.runes.entity.stasis.hit": "Static Entity Hit"
 }

@@ -69,6 +69,7 @@ public abstract class LivingEntityMixin extends Entity {
                     }
                 }
             } else if (accessor.getStasisVelocity().length() > 0) {
+                playSound(SoundEvents.ENTITY_PLAYER_ATTACK_CRIT,1F, 1F);
                 setVelocity(accessor.getStasisVelocity());
                 accessor.setStasisVelocity(Vec3d.ZERO);
                 velocityDirty = true;

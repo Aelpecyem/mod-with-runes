@@ -9,7 +9,7 @@
     "Ael(pecyem)"
   ],
   "license": "CC0-1.0",
-  "icon": "assets/runes/icon.png",
+  "icon": "assets/runes/textures/item/runes/ansuz.png",
 
   "environment": "*",
   "entrypoints": {

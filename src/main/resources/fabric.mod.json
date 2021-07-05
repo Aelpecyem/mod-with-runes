@@ -2,7 +2,6 @@
   "schemaVersion": 1,
   "id": "runes",
   "version": "${version}",
-
   "name": "Simply Runes",
   "description": "Adds simple runes to the game",
   "authors": [
@@ -10,7 +9,10 @@
   ],
   "license": "CC0-1.0",
   "icon": "assets/runes/textures/item/runes/ansuz.png",
-
+  "contact": {
+    "sources": "https://github.com/Aelpecyem/simply-runes",
+    "issues": "https://github.com/Aelpecyem/simply-runes/issues"
+  },
   "environment": "*",
   "entrypoints": {
     "main": [

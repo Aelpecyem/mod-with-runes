@@ -1,0 +1,10 @@
+{
+  "entities": [
+    "player",
+    "armor_stand"
+  ],
+  "slots": [
+    "chest/necklace",
+    "head/hat"
+  ]
+}

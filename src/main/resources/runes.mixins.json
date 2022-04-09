@@ -1,0 +1,23 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "de.aelpecyem.runes.mixin",
+  "compatibilityLevel": "JAVA_17",
+  "mixins": [
+    "common.AbstractMinecartEntityMixin",
+    "common.EnchantmentScreenHandlerMixin",
+    "common.EntityMixin",
+    "common.LivingEntityMixin",
+    "common.PlayerEntityMixin",
+    "common.ServerResourceManagerMixin"
+  ],
+  "client": [
+    "client.EnchantmentScreenMixin",
+    "client.HandledScreenAccessor",
+    "client.LivingEntityRendererMixin",
+    "client.MinecartEntityRendererMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

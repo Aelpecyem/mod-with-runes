@@ -1,0 +1,25 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "runes:orb_of_knowledge"
+    ]
+  },
+  "criteria": {
+    "has_rune": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "runes:ansuz_rune"
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_rune"
+    ]
+  ]
+}

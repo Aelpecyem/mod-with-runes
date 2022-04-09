@@ -1,0 +1,25 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "runes:bifrost_amulet"
+    ]
+  },
+  "criteria": {
+    "has_rune": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "runes:bifrost_rune"
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_rune"
+    ]
+  ]
+}

@@ -1,0 +1,57 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "runes:item/amulet",
+    "layer1": "runes:item/bifrost_amulet/bi"
+  },
+  "overrides": [
+    {
+      "predicate": {
+        "runes:variant": 0.1
+      },
+      "model": "runes:item/bifrost_amulet/queer"
+    },
+    {
+      "predicate": {
+        "runes:variant": 0.2
+      },
+      "model": "runes:item/bifrost_amulet/lesbian"
+    },
+    {
+      "predicate": {
+        "runes:variant": 0.3
+      },
+      "model": "runes:item/bifrost_amulet/gay"
+    },
+    {
+      "predicate": {
+        "runes:variant": 0.4
+      },
+      "model": "runes:item/bifrost_amulet/trans"
+    },
+    {
+      "predicate": {
+        "runes:variant": 0.5
+      },
+      "model": "runes:item/bifrost_amulet/enby"
+    },
+    {
+      "predicate": {
+        "runes:variant": 0.6
+      },
+      "model": "runes:item/bifrost_amulet/ace"
+    },
+    {
+      "predicate": {
+        "runes:variant": 0.7
+      },
+      "model": "runes:item/bifrost_amulet/aro"
+    },
+    {
+      "predicate": {
+        "runes:variant": 0.8
+      },
+      "model": "runes:item/bifrost_amulet/pan"
+    }
+  ]
+}

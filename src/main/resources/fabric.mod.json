@@ -1,0 +1,36 @@
+{
+  "schemaVersion": 1,
+  "id": "runes",
+  "version": "${version}",
+  "name": "Simply Runes",
+  "description": "Adds simple runes to the game",
+  "authors": [
+    "Ael(pecyem)"
+  ],
+  "license": "CC0-1.0",
+  "icon": "assets/runes/textures/item/runes/ansuz.png",
+  "contact": {
+    "sources": "https://github.com/Aelpecyem/simply-runes",
+    "issues": "https://github.com/Aelpecyem/simply-runes/issues"
+  },
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      "de.aelpecyem.runes.RunesMod"
+    ],
+    "client": [
+      "de.aelpecyem.runes.client.RunesClient"
+    ]
+  },
+  "mixins": [
+    "runes.mixins.json"
+  ],
+
+  "depends": {
+    "trinkets": ">=3.0.0",
+    "fabricloader": ">=0.13.3",
+    "fabric": "*",
+    "minecraft": "1.18.2",
+    "java": ">=17"
+  }
+}

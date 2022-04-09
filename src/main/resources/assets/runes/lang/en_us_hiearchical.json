@@ -1,0 +1,50 @@
+{
+  "itemGroup": {
+    "runes": {
+      "group": "Runes"
+    }
+  },
+  "item": {
+    "runes": {
+      "smooth_slate": "Smooth Slate",
+      "bifrost_rune": "Rune of Bifrost",
+      "jera_rune": "Rune of Jera",
+      "bifrost_amulet": "Amulet of Bifrost",
+      "knowledge_fragment": "Knowledge Fragment"
+    }
+  },
+  "tooltip": {
+    "runes": {
+      "bifrost_rune": "Crafting Ingredient",
+      "bifrost_amulet": "\"The untainted gain power\""
+    }
+  },
+  "text": {
+    "runes": {
+      "xp_cost": "Levels: %d",
+      "missing_lapis": "Missing Lapis Lazuli",
+      "unlocked_all": "The scrap indecipherable to you"
+    }
+  },
+  "knowledge_text": {
+    "runes": {
+      "bifrost_rune": {
+        "title": "Rune of Bifrost",
+        "desc": "While strictly speaking not a real rune, the Rune of Bifrost symbolizes the passion of the runemaker. <br>Amulets made from it will buff their wearer as long as they are over 75% of their maximum health. <br>They will also emit colorful particles similar to the equally colorful god-bridge the rune is named after."
+      },
+      "jera_rune": {
+        "title": "Rune of Jera",
+        "desc": "Jera is the rune of abundance. As such, it will fertilize nearby crops. <br>In practice, this selects one random crop to grow every few seconds."
+      }
+    }
+  },
+  "subtitles": {
+    "runes": {
+      "item": {
+        "rock": {
+          "throw": "Rock Thrown"
+        }
+      }
+    }
+  }
+}

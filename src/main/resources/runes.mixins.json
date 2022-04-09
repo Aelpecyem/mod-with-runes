@@ -9,7 +9,7 @@
     "common.EntityMixin",
     "common.LivingEntityMixin",
     "common.PlayerEntityMixin",
-    "common.ServerResourceManagerMixin"
+    "common.DataPackContentsMixin"
   ],
   "client": [
     "client.EnchantmentScreenMixin",

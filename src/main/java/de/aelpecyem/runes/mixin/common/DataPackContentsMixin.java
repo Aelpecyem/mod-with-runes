@@ -1,7 +1,9 @@
 package de.aelpecyem.runes.mixin.common;
 
+import com.google.common.collect.ImmutableList;
 import de.aelpecyem.runes.common.recipe.RuneEnchantingRecipe;
 import de.aelpecyem.runes.common.recipe.RuneEnchantingRecipe.RuneEnchantingManager;
+import java.util.ArrayList;
 import java.util.List;
 import net.minecraft.resource.ResourceReloader;
 import net.minecraft.server.DataPackContents;
@@ -12,13 +14,13 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(DataPackContents.class)
-public class ServerResourceManagerMixin {
+public class DataPackContentsMixin {
     @Unique private final RuneEnchantingManager runeEnchantingManager = new RuneEnchantingRecipe.RuneEnchantingManager();
 
     @Inject(method = "getContents", at = @At("RETURN"), cancellable = true)
     private void getContents(CallbackInfoReturnable<List<ResourceReloader>> cir){
-        List<ResourceReloader> list = cir.getReturnValue();
-        list.add(runeEnchantingManager);
-        cir.setReturnValue(list);
+        List<ResourceReloader> updatedList = new ArrayList<>(cir.getReturnValue());
+        updatedList.add(runeEnchantingManager);
+        cir.setReturnValue(ImmutableList.copyOf(updatedList));
     }
 }

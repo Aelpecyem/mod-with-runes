@@ -1,0 +1,50 @@
+{
+  "itemGroup": {
+    "runes": {
+      "group": "Runes（符石）"
+    }
+  },
+  "item": {
+    "runes": {
+      "smooth_slate": "符石",
+      "bifrost_rune": "虹桥符石",
+      "jera_rune": "耶拉符石",
+      "bifrost_amulet": "虹桥护符",
+      "knowledge_fragment": "智识碎片"
+    }
+  },
+  "tooltip": {
+    "runes": {
+      "bifrost_rune": "合成材料",
+      "bifrost_amulet": "\"岂容亵渎\""
+    }
+  },
+  "text": {
+    "runes": {
+      "xp_cost": "消耗等级：%d",
+      "missing_lapis": "缺少青金石",
+      "unlocked_all": "符文似曾相识，可惜模糊不清"
+    }
+  },
+  "knowledge_text": {
+    "runes": {
+      "bifrost_rune": {
+        "title": "虹桥符石",
+        "desc": "严格来说，这并不是一块真正的符石，虹桥符石仅是符石制造者一腔热血的产物。<br>用它制成的护身符能够在穿戴者生命值大于75%时给予增益效果。<br>此外，正如其名，这种符石还能够从中发散出缤纷的粒子，如同北欧神话中的彩虹桥一般。"
+      },
+      "jera_rune": {
+        "title": "耶拉符石",
+        "desc": "耶拉符石能为你带来丰收，它能够催熟周围的作物。<br>在实际使用中，你会发现，它每秒会随机选择周围的一颗作物进行催熟。"
+      }
+    }
+  },
+  "subtitles": {
+    "runes": {
+      "item": {
+        "rock": {
+          "throw": "符石被掷出"
+        }
+      }
+    }
+  }
+}
